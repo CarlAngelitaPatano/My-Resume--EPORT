@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carl Angelo Patano — Full-Stack Web &amp; App Developer</title>
+<meta name="description" content="Portfolio of Carl Angelo Patano, BSIT student and full-stack web/app developer. Builder of Be@Mandaluyong, a live tourism management system for Mandaluyong City.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bp-bg: #0E2A4D;
+    --bp-bg-2: #123863;
+    --bp-line: rgba(234,242,255,0.10);
+    --bp-line-strong: rgba(234,242,255,0.22);
+    --ink: #EAF2FF;
+    --muted: #93AFD4;
+    --amber: #FFB454;
+    --cyan: #6FD1FF;
+    --paper: #F1F4F1;
+    --paper-2: #E7ECE7;
+    --paper-ink: #12283F;
+    --paper-muted: #4A5F76;
+    --amber-dark: #B9720E;
+    --cyan-dark: #10688C;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --max: 1100px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--paper-ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--cyan-dark); outline-offset:3px; }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,42,77,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--bp-line-strong);
+  }
+  nav{
+    max-width:var(--max); margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--mono); color:var(--ink); font-weight:600; font-size:14px;
+    letter-spacing:.06em; text-decoration:none; display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{ width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 0 3px rgba(255,180,84,0.18); }
+  .nav-links{ display:flex; gap:28px; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--muted); text-decoration:none; transition:color .15s ease;
+  }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.05em;
+    color:var(--bp-bg); background:var(--amber); padding:8px 14px;
+    text-decoration:none; border-radius:2px; font-weight:600;
+    border:1px solid var(--amber);
+  }
+  .nav-cta:hover{ background:transparent; color:var(--amber); }
+  .nav-toggle{ display:none; background:none; border:1px solid var(--bp-line-strong); color:var(--ink); width:38px; height:38px; border-radius:2px; font-family:var(--mono); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--bp-bg);
+    background-image:
+      linear-gradient(var(--bp-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bp-line) 1px, transparent 1px);
+    background-size:36px 36px;
+    color:var(--ink);
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--bp-line-strong);
+  }
+  .hero-inner{
+    max-width:var(--max); margin:0 auto; padding:88px 24px 72px;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center;
+  }
+  .hero-id{ color:var(--cyan); margin-bottom:18px; display:block; }
+  .hero h1{
+    font-family:var(--mono); font-size:clamp(30px,4.4vw,46px); line-height:1.08;
+    margin:0 0 14px; font-weight:600; letter-spacing:-.01em;
+  }
+  .hero h1 span{ color:var(--amber); }
+  .hero p.role{
+    font-size:18px; color:var(--muted); margin:0 0 22px; max-width:46ch; line-height:1.5;
+  }
+  .meta-line{
+    font-family:var(--mono); font-size:12.5px; color:var(--muted); letter-spacing:.03em;
+    margin:0 0 32px; display:flex; flex-wrap:wrap; gap:6px 10px;
+  }
+  .meta-line b{ color:var(--ink); font-weight:500; }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:34px; }
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:.04em; text-decoration:none;
+    padding:12px 20px; border-radius:2px; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn-primary{ background:var(--amber); color:var(--bp-bg); font-weight:600; border:1px solid var(--amber); }
+  .btn-primary:hover{ transform:translateY(-1px); }
+  .btn-ghost{ background:transparent; color:var(--ink); border:1px solid var(--bp-line-strong); }
+  .btn-ghost:hover{ border-color:var(--cyan); color:var(--cyan); }
+
+  .status-tag{
+    font-family:var(--mono); font-size:12px; color:var(--muted);
+    display:inline-flex; align-items:center; gap:9px; border:1px dashed var(--bp-line-strong);
+    padding:9px 14px; border-radius:2px;
+  }
+  .status-tag a{ color:var(--cyan); text-decoration:none; border-bottom:1px dotted var(--cyan); }
+  .status-dot{
+    width:8px; height:8px; border-radius:50%; background:#5CE0A0; flex:none;
+    box-shadow:0 0 0 0 rgba(92,224,160,0.6); animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(92,224,160,0.55); }
+    70%{ box-shadow:0 0 0 8px rgba(92,224,160,0); }
+    100%{ box-shadow:0 0 0 0 rgba(92,224,160,0); }
+  }
+
+  /* schematic diagram */
+  .schematic{ width:100%; height:auto; }
+  .schematic text{ font-family:var(--mono); }
+  .schem-node rect{ fill:var(--bp-bg-2); stroke:var(--bp-line-strong); stroke-width:1; }
+  .schem-node text.label{ fill:var(--ink); font-size:11px; font-weight:600; letter-spacing:.03em; }
+  .schem-node text.tag{ fill:var(--cyan); font-size:9px; letter-spacing:.08em; }
+  .schem-line{ stroke:var(--bp-line-strong); stroke-width:1.4; stroke-dasharray:4 4; fill:none; }
+  .schem-cap{ fill:var(--muted); font-size:9.5px; letter-spacing:.1em; }
+  .schem-fig{ fill:var(--muted); font-size:9.5px; letter-spacing:.05em; }
+
+  /* ---------- SECTIONS (paper) ---------- */
+  section.sheet{ max-width:var(--max); margin:0 auto; padding:76px 24px; border-bottom:1px dashed #C9D3C9; }
+  section.sheet:last-of-type{ border-bottom:none; }
+  .sheet-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:34px; }
+  .sheet-num{ font-family:var(--mono); font-size:13px; color:var(--cyan-dark); font-weight:600; }
+  .sheet-head h2{
+    font-family:var(--mono); font-size:22px; letter-spacing:.02em; margin:0;
+    text-transform:uppercase; font-weight:600; color:var(--paper-ink);
+  }
+  .sheet-head .rule{ flex:1; height:1px; background:#C9D3C9; }
+
+  .about-grid{ display:grid; grid-template-columns:2fr 1fr; gap:40px; }
+  .about-grid p{ font-size:17px; line-height:1.75; color:var(--paper-ink); margin:0 0 16px; }
+  .fact-card{
+    background:#fff; border:1px solid #DCE3DC; border-radius:3px; padding:18px 20px; height:fit-content;
+  }
+  .fact-card .eyebrow{ color:var(--cyan-dark); margin-bottom:10px; display:block; }
+  .fact-row{ display:flex; justify-content:space-between; font-size:13px; padding:7px 0; border-bottom:1px dotted #DCE3DC; font-family:var(--mono); }
+  .fact-row:last-child{ border-bottom:none; }
+  .fact-row span:first-child{ color:var(--paper-muted); }
+
+  /* skills spec table */
+  .spec-table{ border:1px solid #DCE3DC; border-radius:3px; overflow:hidden; background:#fff; }
+  .spec-row{ display:grid; grid-template-columns:160px 1fr; border-bottom:1px dotted #DCE3DC; }
+  .spec-row:last-child{ border-bottom:none; }
+  .spec-key{
+    font-family:var(--mono); font-size:12px; color:var(--cyan-dark); font-weight:600;
+    letter-spacing:.06em; padding:16px 18px; background:#F7F9F7; border-right:1px dotted #DCE3DC;
+  }
+  .spec-val{ padding:14px 18px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .chip{
+    font-family:var(--mono); font-size:12.5px; color:var(--paper-ink); background:var(--paper-2);
+    border:1px solid #D3DBD3; padding:5px 10px; border-radius:2px;
+  }
+
+  /* project */
+  .project-card{ border:1px solid #DCE3DC; border-radius:3px; overflow:hidden; background:#fff; }
+  .browser-chrome{
+    background:var(--bp-bg); padding:10px 14px; display:flex; align-items:center; gap:8px;
+    border-bottom:1px solid var(--bp-line-strong);
+  }
+  .browser-chrome .dots{ display:flex; gap:6px; }
+  .browser-chrome .dots span{ width:8px; height:8px; border-radius:50%; background:var(--bp-line-strong); }
+  .browser-chrome .url{
+    font-family:var(--mono); font-size:11.5px; color:var(--muted); background:var(--bp-bg-2);
+    padding:5px 12px; border-radius:2px; margin-left:6px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .project-body{ padding:30px; }
+  .project-title-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:6px; }
+  .project-title-row h3{ font-family:var(--mono); font-size:19px; margin:0; color:var(--paper-ink); }
+  .live-badge{
+    font-family:var(--mono); font-size:11px; color:#0E7A4A; background:#E5F6EC; border:1px solid #BFE6CE;
+    padding:4px 9px; border-radius:2px; display:inline-flex; align-items:center; gap:6px; letter-spacing:.05em;
+  }
+  .live-badge .d{ width:6px; height:6px; border-radius:50%; background:#0E7A4A; }
+  .project-tagline{ color:var(--paper-muted); font-size:15px; margin:0 0 20px; line-height:1.6; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px; }
+  .tag{
+    font-family:var(--mono); font-size:11px; letter-spacing:.04em; padding:5px 9px; border-radius:2px;
+    border:1px solid; text-transform:uppercase;
+  }
+  .tag.fe{ color:#1C6FB0; border-color:#BFDCF2; background:#EEF6FC; }
+  .tag.be{ color:#8A5A0C; border-color:#F0DDB0; background:#FDF6E7; }
+  .tag.db{ color:#3D7A3F; border-color:#C6E0C7; background:#F0F8F0; }
+  .tag.aux{ color:#6A5AAE; border-color:#D9D2F0; background:#F5F2FC; }
+  .project-list{ margin:0 0 24px; padding:0; list-style:none; }
+  .project-list li{
+    font-size:14.5px; line-height:1.6; color:var(--paper-ink); padding:9px 0 9px 22px; position:relative;
+    border-top:1px dotted #E3E8E3;
+  }
+  .project-list li:first-child{ border-top:none; }
+  .project-list li::before{
+    content:"→"; position:absolute; left:0; color:var(--cyan-dark); font-family:var(--mono); font-size:13px;
+  }
+  .project-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .btn-paper{
+    font-family:var(--mono); font-size:12.5px; text-decoration:none; padding:10px 16px; border-radius:2px;
+    border:1px solid var(--paper-ink); color:var(--paper-ink); display:inline-flex; align-items:center; gap:8px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .btn-paper.solid{ background:var(--paper-ink); color:#fff; }
+  .btn-paper:hover{ background:var(--paper-ink); color:#fff; }
+
+  /* certifications */
+  .cert-list{ list-style:none; margin:0; padding:0; border:1px solid #DCE3DC; border-radius:3px; overflow:hidden; background:#fff; }
+  .cert-list li{
+    display:grid; grid-template-columns:28px 1fr auto; gap:16px; align-items:baseline;
+    padding:16px 20px; border-bottom:1px dotted #DCE3DC; font-size:14.5px;
+  }
+  .cert-list li:last-child{ border-bottom:none; }
+  .cert-list .n{ font-family:var(--mono); color:var(--cyan-dark); font-size:12px; }
+  .cert-list .name{ color:var(--paper-ink); font-weight:600; }
+  .cert-list .issuer{ display:block; color:var(--paper-muted); font-size:13px; font-weight:400; margin-top:2px; }
+  .cert-list .date{ font-family:var(--mono); font-size:12px; color:var(--paper-muted); white-space:nowrap; }
+
+  /* footer / contact */
+  footer{
+    background:var(--bp-bg); color:var(--ink);
+    background-image:
+      linear-gradient(var(--bp-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bp-line) 1px, transparent 1px);
+    background-size:36px 36px;
+  }
+  .footer-inner{ max-width:var(--max); margin:0 auto; padding:80px 24px 40px; }
+  .footer-inner h2{ font-family:var(--mono); font-size:clamp(26px,4vw,38px); margin:0 0 16px; }
+  .footer-inner h2 span{ color:var(--amber); }
+  .footer-inner p{ color:var(--muted); font-size:16px; max-width:52ch; line-height:1.6; margin:0 0 32px; }
+  .contact-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin-bottom:56px; }
+  .contact-item{ border:1px dashed var(--bp-line-strong); border-radius:3px; padding:16px 18px; }
+  .contact-item .eyebrow{ color:var(--cyan); margin-bottom:8px; display:block; }
+  .contact-item a, .contact-item span.val{ font-family:var(--mono); font-size:14px; color:var(--ink); text-decoration:none; }
+  .contact-item a:hover{ color:var(--amber); }
+  .foot-bottom{
+    border-top:1px solid var(--bp-line); padding-top:24px; display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:10px; font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.04em;
+  }
+
+  @media (max-width: 860px){
+    .hero-inner{ grid-template-columns:1fr; padding-top:56px; }
+    .about-grid{ grid-template-columns:1fr; }
+    .schematic{ max-width:420px; }
+  }
+  @media (max-width: 720px){
+    .nav-links{ display:none; }
+    .nav-toggle{ display:block; }
+    .nav-cta{ display:none; }
+  }
+  @media (max-width: 560px){
+    .spec-row{ grid-template-columns:1fr; }
+    .spec-key{ border-right:none; border-bottom:1px dotted #DCE3DC; }
+    .cert-list li{ grid-template-columns:1fr; gap:4px; }
+    .cert-list .n{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="brand" href="#top"><span class="dot"></span>SYS.PATANO_CA</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Spec</a></li>
+      <li><a href="#project">Project</a></li>
+      <li><a href="#certs">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+  </nav>
+</header>
+
+<div id="mobileMenu" style="display:none; background:var(--bp-bg-2); border-bottom:1px solid var(--bp-line-strong);">
+  <ul style="list-style:none; margin:0; padding:16px 24px; display:flex; flex-direction:column; gap:14px; font-family:var(--mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase;">
+    <li><a href="#about" style="color:var(--ink); text-decoration:none;">About</a></li>
+    <li><a href="#skills" style="color:var(--ink); text-decoration:none;">Spec</a></li>
+    <li><a href="#project" style="color:var(--ink); text-decoration:none;">Project</a></li>
+    <li><a href="#certs" style="color:var(--ink); text-decoration:none;">Certs</a></li>
+    <li><a href="#contact" style="color:var(--ink); text-decoration:none;">Contact</a></li>
+    <li><a href="resume.pdf" target="_blank" rel="noopener" style="color:var(--amber); text-decoration:none;">Résumé ↗</a></li>
+  </ul>
+</div>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow hero-id">FIG. 00 — DEVELOPER PROFILE</span>
+        <h1>Carl Angelo<br>Patano<span>.</span></h1>
+        <p class="role">Full-stack web &amp; app developer building systems that ship, not just demos.</p>
+        <p class="meta-line"><b>BSIT</b> · Jose Rizal University · Exp. 2027 &nbsp;|&nbsp; <b>Based in</b> Cainta, Rizal</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="resume.pdf" target="_blank" rel="noopener">Download Résumé</a>
+          <a class="btn btn-ghost" href="https://github.com/CarlAngelitaPatano" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="mailto:carlangelopatano@gmail.com">Email me</a>
+        </div>
+        <div class="status-tag">
+          <span class="status-dot"></span>
+          LIVE SYSTEM — <a href="https://tcimsmandaluyong.infinityfree.me/login" target="_blank" rel="noopener">Be@Mandaluyong</a> · deployed &amp; running
+        </div>
+      </div>
+
+      <div>
+        <svg class="schematic" viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of the Be@Mandaluyong system architecture: browser connects to React frontend, which connects to a PHP API, which connects to a MySQL database.">
+          <text x="0" y="16" class="schem-fig">FIG. 01 — SYSTEM ARCHITECTURE</text>
+
+          <g class="schem-node">
+            <rect x="10" y="46" width="150" height="46" rx="2"/>
+            <text x="24" y="65" class="label">BROWSER</text>
+            <text x="24" y="80" class="tag">CLIENT</text>
+          </g>
+          <path class="schem-line" d="M85 92 L85 116"/>
+
+          <g class="schem-node">
+            <rect x="10" y="118" width="150" height="46" rx="2"/>
+            <text x="24" y="137" class="label">REACT UI</text>
+            <text x="24" y="152" class="tag">TAILWIND CSS</text>
+          </g>
+          <path class="schem-line" d="M160 141 L220 141"/>
+
+          <g class="schem-node">
+            <rect x="222" y="118" width="148" height="46" rx="2"/>
+            <text x="236" y="137" class="label">PHP API</text>
+            <text x="236" y="152" class="tag">BCRYPT AUTH</text>
+          </g>
+          <path class="schem-line" d="M296 164 L296 188"/>
+
+          <g class="schem-node">
+            <rect x="222" y="190" width="148" height="46" rx="2"/>
+            <text x="236" y="209" class="label">MYSQL DB</text>
+            <text x="236" y="224" class="tag">RELATIONAL</text>
+          </g>
+
+          <path class="schem-line" d="M85 164 L85 236 L220 236 L220 213"/>
+          <g class="schem-node">
+            <rect x="10" y="190" width="150" height="46" rx="2"/>
+            <text x="24" y="209" class="label">ADMIN PANEL</text>
+            <text x="24" y="224" class="tag">RECHARTS</text>
+          </g>
+
+          <text x="10" y="270" class="schem-cap">ROLE-BASED ACCESS · ADMIN / TOURIST</text>
+          <text x="10" y="286" class="schem-cap">STATUS: DEPLOYED — INFINITYFREE</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="about">
+    <div class="sheet-head">
+      <span class="sheet-num">01</span>
+      <h2>About</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a fourth-year Information Technology student at Jose Rizal University, focused on web and application development. I like building things that actually run in production — not just tutorials I followed once.</p>
+        <p>My capstone project, Be@Mandaluyong, is a full-stack tourism and cultural information system built for Mandaluyong City's CCAT department — complete with authentication, role-based access, and an admin dashboard. It's live, deployed, and working today.</p>
+        <p>I'm currently building toward graduation in 2027 and looking to grow through internship and OJT opportunities in web or app development.</p>
+      </div>
+      <div class="fact-card">
+        <span class="eyebrow">Quick facts</span>
+        <div class="fact-row"><span>Track</span><span>Web &amp; App Dev</span></div>
+        <div class="fact-row"><span>School</span><span>Jose Rizal University</span></div>
+        <div class="fact-row"><span>Program</span><span>BS Info. Technology</span></div>
+        <div class="fact-row"><span>Grad. date</span><span>June 2027</span></div>
+        <div class="fact-row"><span>Location</span><span>Cainta, Rizal, PH</span></div>
+        <div class="fact-row"><span>Status</span><span>Open to OJT</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="skills">
+    <div class="sheet-head">
+      <span class="sheet-num">02</span>
+      <h2>System Spec</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="spec-table">
+      <div class="spec-row">
+        <div class="spec-key">LANGUAGES</div>
+        <div class="spec-val">
+          <span class="chip">Java</span><span class="chip">PHP</span><span class="chip">JavaScript</span>
+          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">C++</span><span class="chip">Python (basic)</span>
+        </div>
+      </div>
+      <div class="spec-row">
+        <div class="spec-key">TOOLS &amp; DB</div>
+        <div class="spec-val">
+          <span class="chip">MySQL</span><span class="chip">XAMPP</span><span class="chip">Android Studio</span>
+          <span class="chip">VS Code</span><span class="chip">Git</span><span class="chip">GitHub</span>
+        </div>
+      </div>
+      <div class="spec-row">
+        <div class="spec-key">OTHER</div>
+        <div class="spec-val"><span class="chip">REST API Integration</span></div>
+      </div>
+      <div class="spec-row">
+        <div class="spec-key">COLLABORATION</div>
+        <div class="spec-val">
+          <span class="chip">Teamwork</span><span class="chip">Problem-Solving</span><span class="chip">Communication</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="project">
+    <div class="sheet-head">
+      <span class="sheet-num">03</span>
+      <h2>Deployed Project</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="project-card">
+      <div class="browser-chrome">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="url">tcimsmandaluyong.infinityfree.me/login</div>
+      </div>
+      <div class="project-body">
+        <div class="project-title-row">
+          <h3>Be@Mandaluyong (CCAT 4SIGHT / TCIMS)</h3>
+          <span class="live-badge"><span class="d"></span>LIVE</span>
+        </div>
+        <p class="project-tagline">A Tourism and Cultural Information Management System built for Mandaluyong City's CCAT department — capstone project.</p>
+        <div class="tag-row">
+          <span class="tag fe">Frontend · React</span>
+          <span class="tag fe">Tailwind CSS</span>
+          <span class="tag be">Backend · PHP</span>
+          <span class="tag db">Database · MySQL</span>
+          <span class="tag aux">Auth · bcrypt</span>
+          <span class="tag aux">Charts · Recharts</span>
+        </div>
+        <ul class="project-list">
+          <li>Full-stack web app: React frontend, PHP backend, MySQL for data storage</li>
+          <li>Secure authentication with bcrypt password hashing and role-based access for admin and tourist accounts</li>
+          <li>Admin dashboard with interactive data visualizations using Recharts</li>
+          <li>Responsive interface styled with Tailwind CSS</li>
+        </ul>
+        <div class="project-actions">
+          <a class="btn-paper solid" href="https://tcimsmandaluyong.infinityfree.me/login" target="_blank" rel="noopener">View Live Demo ↗</a>
+          <a class="btn-paper" href="https://github.com/CarlAngelitaPatano" target="_blank" rel="noopener">View GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="certs">
+    <div class="sheet-head">
+      <span class="sheet-num">04</span>
+      <h2>Certifications</h2>
+      <span class="rule"></span>
+    </div>
+    <ul class="cert-list">
+      <li>
+        <span class="n">01</span>
+        <span><span class="name">IT Specialist — Databases</span><span class="issuer">Certiport / Pearson VUE</span></span>
+        <span class="date">MAY 2025</span>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <span><span class="name">JavaScript Essentials 1</span><span class="issuer">Cisco Networking Academy / JS Institute</span></span>
+        <span class="date">AUG 2025</span>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <span><span class="name">Gen AI Prompt Engineering Workshop — AI for Financial Wellbeing</span><span class="issuer">Cognizant × Johnson &amp; Johnson (WiSTEM²D)</span></span>
+        <span class="date">SEP 2025</span>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <span class="eyebrow" style="color:var(--cyan);">05 — CONTACT</span>
+    <h2 style="margin-top:14px;">Let's build<span>.</span></h2>
+    <p>Open to OJT and internship opportunities in web and app development. Feel free to reach out.</p>
+    <div class="contact-grid">
+      <div class="contact-item"><span class="eyebrow">Email</span><a href="mailto:carlangelopatano@gmail.com">carlangelopatano@gmail.com</a></div>
+      <div class="contact-item"><span class="eyebrow">Phone</span><span class="val">0966 523 4702</span></div>
+      <div class="contact-item"><span class="eyebrow">Location</span><span class="val">Cainta, Rizal, PH</span></div>
+      <div class="contact-item"><span class="eyebrow">GitHub</span><a href="https://github.com/CarlAngelitaPatano" target="_blank" rel="noopener">@CarlAngelitaPatano</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CARL ANGELO PATANO</span>
+      <span>BUILT WITH REACT · PHP · MYSQL · SHIPPED ON VERCEL</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('navToggle');
+  var menu = document.getElementById('mobileMenu');
+  toggle.addEventListener('click', function(){
+    var open = menu.style.display === 'block';
+    menu.style.display = open ? 'none' : 'block';
+    toggle.setAttribute('aria-expanded', String(!open));
+  });
+  document.querySelectorAll('#mobileMenu a').forEach(function(a){
+    a.addEventListener('click', function(){ menu.style.display = 'none'; });
+  });
+</script>
+
+</body>
+</html>
